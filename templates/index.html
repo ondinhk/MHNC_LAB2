@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <title>Demo flask</title>
+    <style>
+        html {
+            height: 100vh;
+        }
+
+        body {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .formFile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            width: 700px;
+            height: 500px;
+            border: 1px solid black;
+        }
+
+        .btnSubmit {
+            width: 100px;
+            height: 30px;
+            background-color: #1abc9c;
+            border: 1px solid;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Form gửi hình -->
+    <form class="formFile" role="form" action="/uploads" method="post" enctype="multipart/form-data">
+        <img id="imageDemo" src="#" alt="your image" />
+        <input type="file" onchange="readURL(this);" name="imageFile" id="imageFile"/>
+        <input type="submit" class="btnSubmit" value="Send">
+        <h1> {{ label}}<br></h1>
+        <h3> {{score}}</h3>
+    </form>
+
+    <script>
+        // Dùng js để thay đổi url image, để hiện thị hình ảnh khi up file
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imageDemo').attr('src', e.target.result).width(170).height(220);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+</body>
+
+</html>
